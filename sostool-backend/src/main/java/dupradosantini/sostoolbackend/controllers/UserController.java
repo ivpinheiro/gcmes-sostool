@@ -1,6 +1,7 @@
 package dupradosantini.sostoolbackend.controllers;
 
 import dupradosantini.sostoolbackend.domain.AppUser;
+import dupradosantini.sostoolbackend.domain.Workspace;
 import dupradosantini.sostoolbackend.domain.dtos.RoleHistoryDto;
 import dupradosantini.sostoolbackend.services.interfaces.UserService;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,12 @@ public class UserController {
     @GetMapping("/{userId}/role-history")
     public ResponseEntity<List<RoleHistoryDto>> getRoleHistory(@PathVariable Integer userId){
         List<RoleHistoryDto> returnList = userService.findUserRoleHistory(userId);
+        return ResponseEntity.ok().body(returnList);
+    }
+
+    @GetMapping("/{userId}/project-history")
+    public ResponseEntity<Set<Workspace>> getProjectHistory(@PathVariable Integer userId){
+        Set<Workspace> returnList = userService.findUserProjectHistory(userId);
         return ResponseEntity.ok().body(returnList);
     }
 

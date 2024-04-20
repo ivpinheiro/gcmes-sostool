@@ -1,6 +1,7 @@
 package dupradosantini.sostoolbackend.services.interfaces;
 
 import dupradosantini.sostoolbackend.domain.AppUser;
+import dupradosantini.sostoolbackend.domain.Workspace;
 import dupradosantini.sostoolbackend.domain.dtos.RoleHistoryDto;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserService {
     List<RoleHistoryDto> findUserRoleHistory(Integer userId);
 
     Set<AppUser> findCurrentWorkspaceUsers(Integer workspaceId);
+
+    Set<Workspace> findUserProjectHistory(Integer userId);
 }

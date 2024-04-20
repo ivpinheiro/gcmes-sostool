@@ -300,17 +300,16 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 
     @Override
     public Set<AppUser> assignUserToRole(Integer workspaceId, Integer roleId, Integer memberId) throws ObjectNotFoundException {
-        var workspace =findById(workspaceId);
+        var workspace = findById(workspaceId);
         var role = findRoleById(roleId);
         var user = userService.findById(memberId);
         var userCurrentMemberSet = userService.findUserMemberSet(user,role);
         if(userCurrentMemberSet.isPresent()){
             System.out.println("Usuário ja é membro desse role.");
             return userService.findUsersWithRole(role);
-        }else if(!userService.UserHasRoleInWorkspace(user, workspace)){
-
+        } else if(!userService.UserHasRoleInWorkspace(user, workspace)){
             var currentDate = Date.from(Instant.now());
-            var newMember = new WorkspaceMember(user,role,workspace, currentDate);
+            var newMember = new WorkspaceMember(user, role, workspace, currentDate);
             this.userService.createWorkspaceMember(newMember);
             return userService.findUsersWithRole(role);
         }

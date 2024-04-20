@@ -2,6 +2,7 @@ package dupradosantini.sostoolbackend.repositories;
 
 import dupradosantini.sostoolbackend.domain.AppUser;
 import dupradosantini.sostoolbackend.domain.WorkspaceMember;
+import dupradosantini.sostoolbackend.domain.Workspace;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +32,6 @@ public interface WorkspaceMemberRepository extends JpaRepository<WorkspaceMember
     @Query("SELECT a FROM WorkspaceMember a WHERE (a.workspace.id =:workspace_id) AND (a.endDate IS null)")
     Set<WorkspaceMember> findCurrentWorkspaceMembersInWorkspace(@Param("workspace_id") Integer workspace_id);
 
+    @Query("SELECT DISTINCT a.workspace FROM WorkspaceMember a WHERE a.appUser.id=:user_id AND (a.endDate IS null)")
+    Set<Workspace> findUserWorkspaces(@Param("user_id") Integer user_id);
 }

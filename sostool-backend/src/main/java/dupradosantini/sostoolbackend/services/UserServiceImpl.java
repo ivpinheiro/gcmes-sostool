@@ -4,6 +4,7 @@ import dupradosantini.sostoolbackend.domain.AppUser;
 import dupradosantini.sostoolbackend.domain.BusinessRole;
 import dupradosantini.sostoolbackend.domain.Workspace;
 import dupradosantini.sostoolbackend.domain.WorkspaceMember;
+import dupradosantini.sostoolbackend.domain.Workspace;
 import dupradosantini.sostoolbackend.domain.dtos.RoleHistoryDto;
 import dupradosantini.sostoolbackend.repositories.UserRepository;
 import dupradosantini.sostoolbackend.repositories.WorkspaceMemberRepository;
@@ -48,8 +49,8 @@ public class UserServiceImpl implements UserService{
        return workspaceMemberRepository.findWorkspaceMemberByAppUserAndBusinessRole(user.getId(), businessRole.getId());
     }
 
-    public WorkspaceMember createWorkspaceMember(WorkspaceMember workspaceMember){
-        return this.workspaceMemberRepository.save(workspaceMember);
+    public void createWorkspaceMember(WorkspaceMember workspaceMember){
+        this.workspaceMemberRepository.save(workspaceMember);
     }
 
     public Set<AppUser> findUsersWithRole(BusinessRole role){
@@ -88,11 +89,16 @@ public class UserServiceImpl implements UserService{
         return this.workspaceMemberRepository.findCurrentUsersInWorkspace(workspaceId);
     }
 
+    @Override
+    public Set<Workspace> findUserProjectHistory(Integer userId) {
+        return this.workspaceMemberRepository.findUserWorkspaces(userId);
+    }
+
     public Set<WorkspaceMember> findCurrentWorkspaceMembers(Integer workspaceId) {
         return this.workspaceMemberRepository.findCurrentWorkspaceMembersInWorkspace(workspaceId);
     }
 
-    public WorkspaceMember saveWorkspaceMember(WorkspaceMember workspaceMember){
-        return this.workspaceMemberRepository.save(workspaceMember);
+    public void saveWorkspaceMember(WorkspaceMember workspaceMember){
+        this.workspaceMemberRepository.save(workspaceMember);
     }
 }
