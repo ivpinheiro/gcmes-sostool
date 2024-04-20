@@ -19,5 +19,5 @@ public interface UserService {
 
     Set<AppUser> findCurrentWorkspaceUsers(Integer workspaceId);
 
-    Set<Workspace> findUserProjectHistory(Integer userId);
+    Set<Workspace> findUserOngoingProjects(Integer userId);
 }

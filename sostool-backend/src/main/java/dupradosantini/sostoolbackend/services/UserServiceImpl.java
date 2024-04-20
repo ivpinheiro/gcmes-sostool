@@ -90,8 +90,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Set<Workspace> findUserProjectHistory(Integer userId) {
-        return this.workspaceMemberRepository.findUserWorkspaces(userId);
+    public Set<Workspace> findUserOngoingProjects(Integer userId) {
+        return this.workspaceMemberRepository.findUserOngoingWorkspaces(userId);
     }
 
     public Set<WorkspaceMember> findCurrentWorkspaceMembers(Integer workspaceId) {

@@ -45,9 +45,9 @@ public class UserController {
         return ResponseEntity.ok().body(returnList);
     }
 
-    @GetMapping("/{userId}/project-history")
-    public ResponseEntity<Set<Workspace>> getProjectHistory(@PathVariable Integer userId){
-        Set<Workspace> returnList = userService.findUserProjectHistory(userId);
+    @GetMapping("/{userId}/ongoing-projects")
+    public ResponseEntity<Set<Workspace>> getOngoingProjects(@PathVariable Integer userId){
+        Set<Workspace> returnList = userService.findUserOngoingProjects(userId);
         return ResponseEntity.ok().body(returnList);
     }
 
