@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RoleHistoryItem, User } from './userModel';
+import {ProjectUser, RoleHistoryItem,User} from './userModel';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +28,10 @@ export class UserReadService {
     return this.http.get<RoleHistoryItem[]>(url);
 
   }
+
+  findUserProject(userId: number):Observable<ProjectUser[]>{
+    const url = `${this.baseUrl}/users/${userId}/ongoing-projects`
+    return this.http.get<ProjectUser[]>(url);
+  }
+
 }

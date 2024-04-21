@@ -77,6 +77,15 @@
           </p>
         </div>
       </div>
+
+      <div class="field">
+        <label class="label">Participando dos projetos</label>
+        <div class="control" *ngFor="let item of this.selectedUserProjects">
+          <p>
+            {{item.name}}
+        </div>
+
+      </div>
       <!-- MODAL CONTENT -->
     </section>
     <footer class="modal-card-foot">

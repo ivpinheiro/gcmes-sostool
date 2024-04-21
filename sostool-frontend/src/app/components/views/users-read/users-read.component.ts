@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserReadService } from './user-read.service';
-import { RoleHistoryItem, User } from './userModel';
+import {ProjectUser, RoleHistoryItem, User} from './userModel';
 import {formatDate} from '@angular/common';
 
 @Component({
@@ -13,6 +13,8 @@ export class UsersReadComponent implements OnInit {
   userArray:User[] = [];
   selectedUser = {} as User;
   selectedUsersHistory:RoleHistoryItem[] =[];
+  selectedUserProjects:ProjectUser[] = [];
+
 
   constructor(private service: UserReadService) { }
 
@@ -54,6 +56,7 @@ export class UsersReadComponent implements OnInit {
   viewUser(user: User, modal: HTMLElement){
     this.selectedUser = user;
     this.getRoleHistory();
+    this.getProjectHistory();
     console.log(user);
     this.toggleModal(modal);
   }
@@ -65,6 +68,15 @@ export class UsersReadComponent implements OnInit {
         this.selectedUsersHistory = response;
       }
     })
+  }
+
+  getProjectHistory(){
+    this.service.findUserProject(this.selectedUser.id)
+      .subscribe({
+        next: (response)=>{
+          this.selectedUserProjects = response;
+        }
+      })
   }
 
   prettyDate(date:Date):string{
